@@ -1,3 +1,7 @@
+import random
+from statistics import mean
+
+
 class Counter(dict):
     """
     A counter keeps track of counts for a set of keys.
@@ -67,6 +71,27 @@ class Counter(dict):
         values = [x[1] for x in all]
         maxIndex = values.index(max(values))
         return all[maxIndex][0]
+
+    def max(self):
+        if len(list(self.keys())) == 0:
+            return None
+        all = list(self.items())
+        values = [x[1] for x in all]
+        return max(values)
+
+    def min(self):
+        if len(list(self.keys())) == 0:
+            return None
+        all = list(self.items())
+        values = [x[1] for x in all]
+        return min(values)
+
+    def average(self):
+        if len(list(self.keys())) == 0:
+            return None
+        all = list(self.items())
+        values = [x[1] for x in all]
+        return mean(values)
 
     def sortedKeys(self):
         """
