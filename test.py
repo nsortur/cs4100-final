@@ -1,6 +1,7 @@
 import random
 
 import gym
+import matplotlib.pyplot as plt
 # import tensorflow as tf
 from numpy import argmax
 
@@ -20,8 +21,11 @@ print(action_space.sample())
 print(env.observation_space)
 # print(env.observation_space.low)
 env.reset()
+
+episode_rewards = []
+q_size = []
 # 300
-for i_episode in range(100000):
+for i_episode in range(1000):
     observation = env.reset()
     episode_reward = 0
     for t in range(5000):
@@ -51,9 +55,23 @@ for i_episode in range(100000):
         episode_reward += reward
         observation = next_observation
 
+    episode_rewards.append(episode_reward)
+    q_size.append( len(q_vals.keys()))
     print('Episode reward:', episode_reward)
     print('Total entries', len(q_vals.keys()))
     # print('best q value', q_vals.max())
     # print('min q val', q_vals.min())
     # print('average q val', q_vals.average())
+
+f1 = plt.figure()
+f2 = plt.figure()
+ax1 = f1.add_subplot(111)
+ax1.plot(episode_rewards)
+ax2 = f2.add_subplot(111)
+ax2.plot(q_size)
+plt.show()
+#
+# plt.plot(episode_rewards)
+# plt.plot(q_size)
+# plt.show()
 env.close()
